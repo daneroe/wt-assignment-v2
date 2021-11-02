@@ -6,42 +6,42 @@ export function ItemRecall(props) {
   // Persisted Data
   let store = window.sessionStorage
 
-  let storedItemData = JSON.parse(store.getItem('itemData'))
-  let storedQuery = store.getItem('query')
-  let storedYear = store.getItem("year" || "")
+  let storedItemData = JSON.parse(store.getItem('itemData'));
+  let storedQuery = store.getItem('query');
+  let storedYear = store.getItem("year" || "");
 
   // Set default state for our variables. Use persisted state if exists
   const [searchQuery, setSearchQuery] = useState(storedQuery || "");
   const [searchYear, setSearchYear] = useState(storedYear.toString() || "");
-  const [validSearch, setValidSearch] = useState(true)
+  const [validSearch, setValidSearch] = useState(true);
 
   // Set default state for items and years (Empty)
-  const [years, setYears] = useState([])
-  const [items, setItems] = useState(storedItemData || [])
+  const [years, setYears] = useState([]);
+  const [items, setItems] = useState(storedItemData || []);
   const [itemNames, setItemNames] = useState([]);
 
   // Wrapper for setSearchQuery
   const setString = (query) => {
     store.setItem('query', query);
-    setSearchQuery(query)
+    setSearchQuery(query);
   }
 
   // Wrapper for setSearchYear
   const setYearSelect = (year) => {
     store.setItem('year', year);
-    setSearchYear(year)
+    setSearchYear(year);
   }
 
   // URLs
-  const BASE_URL = "http://localhost:56384"
-  const RECALL_SEARCH = "/api/RecallSearch?searchText="
-  const YEAR_SEARCH = "/api/YearList"
-  const NAME_LIST = "/api/NameList"
-  const BASE_FRONTEND_URL = 'http://localhost:3001'
+  const BASE_URL = "http://localhost:56384";
+  const RECALL_SEARCH = "/api/RecallSearch?searchText=";
+  const YEAR_SEARCH = "/api/YearList";
+  const NAME_LIST = "/api/NameList";
+  const BASE_FRONTEND_URL = 'http://localhost:3001';
 
   const detailClicked = (item, year) => {
-    let detailURL = BASE_FRONTEND_URL + `/detail?itemID=${item.itemID}&year=${year}`
-    window.location.assign(detailURL)
+    let detailURL = BASE_FRONTEND_URL + `/detail?itemID=${item.itemID}&year=${year}`;
+    window.location.assign(detailURL);
   }
 
   const fetchItemData = (query) => {
@@ -55,18 +55,18 @@ export function ItemRecall(props) {
     // Fecth if so
     setValidSearch(true);
 
-    const YEARPART = searchYear === "" ? "" : `&year=${searchYear}`
+    const YEARPART = searchYear === "" ? "" : `&year=${searchYear}`;
 
     try {
       fetch(BASE_URL + RECALL_SEARCH + query + YEARPART)
         .then(res => res.json())
         .then(data => {
-          console.log(data)
-          setItems(data)
+          console.log(data);
+          setItems(data);
           store.setItem('itemData', JSON.stringify(data));
         })
     } catch (error) {
-      console.log('failed', error)
+      console.log('failed', error);
     }
   }
 
@@ -75,11 +75,11 @@ export function ItemRecall(props) {
       fetch(BASE_URL + YEAR_SEARCH)
         .then(res => res.json())
         .then(data => {
-          console.log(data)
-          setYears(data)
+          console.log(data);
+          setYears(data);
         })
     } catch (error) {
-      console.log('failed', error)
+      console.log('failed', error);
     }
   }
 
@@ -88,11 +88,11 @@ export function ItemRecall(props) {
       fetch(BASE_URL + NAME_LIST)
         .then(res => res.json())
         .then(data => {
-          console.log(data)
-          setItemNames(data)
+          console.log(data);
+          setItemNames(data);
         })
     } catch (error) {
-      console.log('failed', error)
+      console.log('failed', error);
     }
   }
 
