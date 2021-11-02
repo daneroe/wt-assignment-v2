@@ -3,43 +3,49 @@ import { useEffect, useState } from 'react';
 
 export function ItemDetail() {
 
-    const BASE_URL = "http://localhost:56384"
-    const DETAIL_SEARCH = "/api/RecallDetail?itemID="
+    // URL Details
+    const BASE_URL = "http://localhost:56384";
+    const DETAIL_SEARCH = "/api/RecallDetail?itemID=";
 
+    // Extract Params from URL
     const QUERY_STRING = window.location.search;
     const URL_PARAMS = new URLSearchParams(QUERY_STRING);
-    let itemID = URL_PARAMS.get("itemID")
-    let searchYear = URL_PARAMS.get("year")
 
-    const [itemName, setItemName] = useState("")
-    const [itemCost, setItemCost] = useState("")
-    const [itemDescription, setItemDescription] = useState("")
-    const [itemImage, setItemImage] = useState("")
-    const [customerDetails, setCustomerDetails] = useState([])
+    // Extract individual params
+    let itemID = URL_PARAMS.get("itemID");
+    let searchYear = URL_PARAMS.get("year");
+
+    // Vars for view
+    const [itemName, setItemName] = useState("");
+    const [itemCost, setItemCost] = useState("");
+    const [itemDescription, setItemDescription] = useState("");
+    const [itemImage, setItemImage] = useState("");
+    const [customerDetails, setCustomerDetails] = useState([]);
 
     const fetchItemDetail = () => {
 
-        const YEARPART = searchYear === "" ? "" : `&year=${searchYear}`
+        // If year is empty set that part to blank
+        const YEARPART = searchYear === "" ? "" : `&year=${searchYear}`;
 
         try {
             fetch(BASE_URL + DETAIL_SEARCH + itemID + YEARPART)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
-                    setItemName(data.item.itemName)
-                    setItemCost(data.item.itemCost)
-                    setItemDescription(data.item.itemDescription)
-                    setCustomerDetails(data.customerList)
-                    setItemImage(data.item.itemImage)
+                    console.log(data);
+                    setItemName(data.item.itemName);
+                    setItemCost(data.item.itemCost);
+                    setItemDescription(data.item.itemDescription);
+                    setCustomerDetails(data.customerList);
+                    setItemImage(data.item.itemImage);
                 })
         } catch (error) {
-            console.log('failed', error)
+            console.log('failed', error);
         }
     }
 
     // Effects
     useEffect(() => {
-        fetchItemDetail()
+        fetchItemDetail();
     }, []);
 
     return (
