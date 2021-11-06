@@ -37,7 +37,7 @@ export function ItemRecall(props) {
   const RECALL_SEARCH = "/api/RecallSearch?searchText=";
   const YEAR_SEARCH = "/api/YearList";
   const NAME_LIST = "/api/NameList";
-  const BASE_FRONTEND_URL = 'http://localhost:3001';
+  const BASE_FRONTEND_URL = 'http://localhost:3000';
 
   const detailClicked = (item, year) => {
     let detailURL = BASE_FRONTEND_URL + `/detail?itemID=${item.itemID}&year=${year}`;
