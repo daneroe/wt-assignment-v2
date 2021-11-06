@@ -5,19 +5,18 @@ export function ItemRecall(props) {
 
   // Persisted Data
   let store = window.sessionStorage
-
-  let storedItemData = JSON.parse(store.getItem('itemData'));
-  let storedQuery = store.getItem('query');
-  let storedYear = store.getItem("year" || "");
+  let storedItemData = JSON.parse(store.getItem('itemData')) || [];
+  let storedQuery = store.getItem('query') || '';
+  let storedYear = store.getItem("year") || '';
 
   // Set default state for our variables. Use persisted state if exists
-  const [searchQuery, setSearchQuery] = useState(storedQuery || "");
-  const [searchYear, setSearchYear] = useState(storedYear.toString() || "");
+  const [searchQuery, setSearchQuery] = useState(storedQuery);
+  const [searchYear, setSearchYear] = useState(storedYear);
   const [validSearch, setValidSearch] = useState(true);
 
   // Set default state for items and years (Empty)
   const [years, setYears] = useState([]);
-  const [items, setItems] = useState(storedItemData || []);
+  const [items, setItems] = useState(storedItemData);
   const [itemNames, setItemNames] = useState([]);
 
   // Wrapper for setSearchQuery

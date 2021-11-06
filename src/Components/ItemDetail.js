@@ -64,7 +64,7 @@ export function ItemDetail() {
                     <div className="col-9">
                         <h4><b>Product: </b>{itemName}</h4>
                         <h5><b>Unit Cost: </b>{itemCost}</h5>
-                        <p><b>Descritpion: </b>{itemDescription}</p>
+                        <p><b>Description: </b>{itemDescription}</p>
                     </div>
                     <div className="col-3">
                         <img src={itemImage} alt={itemName} style={{ maxWidth: '100%' }}></img>
