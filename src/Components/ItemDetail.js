@@ -6,6 +6,7 @@ export function ItemDetail() {
     // URL Details
     const BASE_URL = "http://localhost:56384";
     const DETAIL_SEARCH = "/api/RecallDetail?itemID=";
+    const BASE_FRONTEND_URL = 'http://localhost:3000';
 
     // Extract Params from URL
     const QUERY_STRING = window.location.search;
@@ -43,6 +44,12 @@ export function ItemDetail() {
         }
     }
 
+
+    // Return to the recall page
+    const returnClicked = () => {
+        window.location.assign(BASE_FRONTEND_URL);
+    }
+
     // Effects
     useEffect(() => {
         fetchItemDetail();
@@ -62,6 +69,12 @@ export function ItemDetail() {
                     <div className="col-3">
                         <img src={itemImage} alt={itemName} style={{ maxWidth: '100%' }}></img>
                     </div>
+                </div>
+            </div>
+
+            <div className="mb-2 row">
+                <div className="col-3">
+                    <button onClick={(e) => returnClicked()} className="btn btn-outline-primary">Return to Recall Page</button>
                 </div>
             </div>
 
