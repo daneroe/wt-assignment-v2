@@ -1,7 +1,7 @@
 import "./ItemRecall.css"
 import { useEffect, useState } from 'react';
 
-export function ItemRecall(props) {
+export function ItemRecall() {
 
   // Persisted Data
   let store = window.sessionStorage
@@ -32,11 +32,13 @@ export function ItemRecall(props) {
   }
 
   // URLs
-  const BASE_URL = "http://localhost:56384";
+  const BASE_API_URL = "http://localhost:56384";
   const RECALL_SEARCH = "/api/RecallSearch?searchText=";
   const YEAR_SEARCH = "/api/YearList";
   const NAME_LIST = "/api/NameList";
-  const BASE_FRONTEND_URL = 'http://localhost:3000';
+
+  // Grab this from the URL in case the port changes
+  const BASE_FRONTEND_URL = window.location.origin;
 
   const detailClicked = (item, year) => {
     let detailURL = BASE_FRONTEND_URL + `/detail?itemID=${item.itemID}&year=${year}`;
@@ -57,7 +59,7 @@ export function ItemRecall(props) {
     const YEARPART = searchYear === "" ? "" : `&year=${searchYear}`;
 
     try {
-      fetch(BASE_URL + RECALL_SEARCH + query + YEARPART)
+      fetch(BASE_API_URL + RECALL_SEARCH + query + YEARPART)
         .then(res => res.json())
         .then(data => {
           console.log(data);
@@ -71,7 +73,7 @@ export function ItemRecall(props) {
 
   const fetchYears = () => {
     try {
-      fetch(BASE_URL + YEAR_SEARCH)
+      fetch(BASE_API_URL + YEAR_SEARCH)
         .then(res => res.json())
         .then(data => {
           console.log(data);
@@ -84,7 +86,7 @@ export function ItemRecall(props) {
 
   const fetchNames = () => {
     try {
-      fetch(BASE_URL + NAME_LIST)
+      fetch(BASE_API_URL + NAME_LIST)
         .then(res => res.json())
         .then(data => {
           console.log(data);

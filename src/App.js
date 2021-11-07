@@ -1,7 +1,6 @@
 import './App.css';
 import { ItemRecall } from './Components/ItemRecall'
 import { ItemDetail } from './Components/ItemDetail'
-// import { useEffect, useState } from 'react';
 import { Switch, Route } from "react-router-dom";
 
 function App() {

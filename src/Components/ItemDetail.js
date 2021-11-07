@@ -6,7 +6,9 @@ export function ItemDetail() {
     // URL Details
     const BASE_URL = "http://localhost:56384";
     const DETAIL_SEARCH = "/api/RecallDetail?itemID=";
-    const BASE_FRONTEND_URL = 'http://localhost:3000';
+
+    // Grab this from the URL in case the port changes
+    const BASE_FRONTEND_URL = window.location.origin;
 
     // Extract Params from URL
     const QUERY_STRING = window.location.search;
@@ -16,7 +18,7 @@ export function ItemDetail() {
     let itemID = URL_PARAMS.get("itemID");
     let searchYear = URL_PARAMS.get("year");
 
-    // Vars for view
+    // State variables for view
     const [itemName, setItemName] = useState("");
     const [itemCost, setItemCost] = useState("");
     const [itemDescription, setItemDescription] = useState("");
@@ -44,7 +46,6 @@ export function ItemDetail() {
         }
     }
 
-
     // Return to the recall page
     const returnClicked = () => {
         window.location.assign(BASE_FRONTEND_URL);
@@ -63,7 +64,7 @@ export function ItemDetail() {
                 <div className="row">
                     <div className="col-9">
                         <h4><b>Product: </b>{itemName}</h4>
-                        <h5><b>Unit Cost: </b>{itemCost}</h5>
+                        <h5><b>Unit Cost: </b>${itemCost}</h5>
                         <p><b>Description: </b>{itemDescription}</p>
                     </div>
                     <div className="col-3">
@@ -74,7 +75,7 @@ export function ItemDetail() {
 
             <div className="mb-2 row">
                 <div className="col-3">
-                    <button onClick={(e) => returnClicked()} className="btn btn-outline-primary">Return to Recall Page</button>
+                    <button onClick={(e) => returnClicked()} className="btn btn-outline-primary">&#129052; Return to Recall Search</button>
                 </div>
             </div>
 
